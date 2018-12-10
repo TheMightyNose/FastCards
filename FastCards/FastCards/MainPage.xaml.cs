@@ -9,38 +9,45 @@ namespace FastCards
 {
 	public partial class MainPage : ContentPage
 	{
-		Card[] cards = new Card[5];
+		bool meaning;
 		int currentCard = 0;
+		List<Card> deck = new List<Card>();
 		public MainPage()
 		{
 			InitializeComponent();
-			cards[0] = new Card("front", "back");
-			cards[1] = new Card("monkey", "gorilla");
-			cards[2] = new Card("test", "debug");
-			cards[3] = new Card("reee", "REEE");
-			cards[4] = new Card("hiragana", "katakana");
-			Question.Text = cards[currentCard].front;
+
+			deck = TestDeck.Load();
+			
+			Question.Text = deck[currentCard].front;
 		}
 
 		void Button_Clicked(object sender, System.EventArgs e)
 		{
-			if (Input.Text == cards[currentCard].back)
+			if (Input.Text == (meaning ? deck[currentCard].meaning : deck[currentCard].reading))
 			{
 				Answer.Text = "correct!";
 			}
 			else
 			{
-				Answer.Text = "Wrong! " + cards[currentCard].back;
+				Answer.Text = "Wrong! " + (meaning ? deck[currentCard].meaning : deck[currentCard].reading);
 			}
 
-			currentCard++;
+			if (deck[currentCard].meaning != "" && !meaning)
+			{
+				meaning = true;
+			}
+			else
+			{
+				meaning = false;
+				currentCard++;
+			}
 
-			if (currentCard >= 5)
+			if (currentCard >= deck.Count)
 			{
 				currentCard = 0;
 			}
 
-			Question.Text = cards[currentCard].front;
+			Question.Text = deck[currentCard].front;
 		}
 	}
 }
