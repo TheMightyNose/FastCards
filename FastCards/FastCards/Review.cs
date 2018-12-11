@@ -16,13 +16,9 @@ namespace FastCards
 			else
 			{
 				mp.meaning = false;
-				mp.currentCard++;
+				mp.currentCard = NextCard.Pick(mp.deck);
 			}
 
-			if (mp.currentCard >= mp.deck.Count)
-			{
-				mp.currentCard = 0;
-			}
 			if (mp.meaning)
 			{
 				mp.Question.Text = "Meaning: " + mp.deck[mp.currentCard].front;

@@ -10,6 +10,7 @@ namespace FastCards
 		const float maxTime = 30.0f;
 		const float failTime = maxTime * 2;
 		const int timesMeasured = 3;
+		public int weight;
 
 		public string front;
 		public string reading;

@@ -7,10 +7,14 @@
 
         <Label></Label>
         <Label x:Name="Question" FontSize="Large" Text="Question" TextColor="White"
-        HorizontalOptions="Center" VerticalOptions="Start" x:FieldModifier="public"/>
-        <Entry x:Name="Input" Placeholder="Answer" Text=""  TextColor="#FFFFFF" x:FieldModifier="public" HorizontalTextAlignment="Center"/>
-        <Button x:Name="Button" Text="Check answer"  TextColor="White" BackgroundColor="#303030" Clicked="Button_Clicked" x:FieldModifier="public"/>
-        <Label x:Name="Answer" FontSize="Large" Text="lol" TextColor="White" x:FieldModifier="public" HorizontalOptions="Center"/>
+            HorizontalOptions="Center" VerticalOptions="Start" x:FieldModifier="public"/>
+        <Entry x:Name="Input" Placeholder="Answer" Text=""  TextColor="#FFFFFF" 
+            x:FieldModifier="public" HorizontalTextAlignment="Center" 
+            IsSpellCheckEnabled="False" IsTextPredictionEnabled="false"/>
+        <Button x:Name="Button" Text="Check answer"  TextColor="White" BackgroundColor="#303030" 
+                Clicked="Button_Clicked" x:FieldModifier="public"/>
+        <Label x:Name="Answer" FontSize="Large" Text="lol" TextColor="White" 
+               x:FieldModifier="public" HorizontalOptions="Center"/>
 
     </StackLayout>
 </ContentPage>
