@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace FastCards
 {
-	class Card
+	public class Card
 	{
 		const float maxTime = 30.0f;
 		const float failTime = maxTime * 2;

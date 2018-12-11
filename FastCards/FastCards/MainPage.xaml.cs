@@ -10,51 +10,36 @@ namespace FastCards
 {
 	public partial class MainPage : ContentPage
 	{
-		Stopwatch stopwatch = new Stopwatch();
-		bool meaning;
-		int currentCard = 0;
-		List<Card> deck = new List<Card>();
+		public Stopwatch stopwatch = new Stopwatch();
+		public bool meaning;
+		public int currentCard = 0;
+		public List<Card> deck = new List<Card>();
+		bool newQuestion = true;
+
 		public MainPage()
 		{
 			InitializeComponent();
 
 			deck = TestDeck.Load();
-			
-			Question.Text = deck[currentCard].front;
-			stopwatch.Start();
+
+			Review.ShowAnswer(this);
+			{
+				newQuestion = true;
+			}
 		}
 
 		void Button_Clicked(object sender, System.EventArgs e)
 		{
-			if (Input.Text == (meaning ? deck[currentCard].meaning : deck[currentCard].reading))
+			if (newQuestion == true)
 			{
-				deck[currentCard].SaveScore(true, stopwatch.ElapsedMilliseconds / 1000.0f);
-				Answer.Text = "correct!" + deck[currentCard].timeUsed.Average();
+				Review.NewQuestion(this);
+				newQuestion = false;
 			}
 			else
-			{
-				deck[currentCard].SaveScore(false, stopwatch.ElapsedMilliseconds / 1000.0f);
-				Answer.Text = "Wrong! " + (meaning ? deck[currentCard].meaning : deck[currentCard].reading) + deck[currentCard].timeUsed.Average() ;
+			{ 
+				Review.ShowAnswer(this);
+				newQuestion = true;
 			}
-
-			if (deck[currentCard].meaning != "" && !meaning)
-			{
-				meaning = true;
-			}
-			else
-			{
-				meaning = false;
-				currentCard++;
-			}
-
-			if (currentCard >= deck.Count)
-			{
-				currentCard = 0;
-			}
-
-			Question.Text = deck[currentCard].front;
-
-			stopwatch.Restart();
 		}
 	}
 }
