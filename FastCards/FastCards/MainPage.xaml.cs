@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using System.Diagnostics;
+using System.IO;
 
 namespace FastCards
 {
@@ -15,6 +16,7 @@ namespace FastCards
 		public int currentCard = 0;
 		public List<Card> deck = new List<Card>();
 		bool newQuestion = true;
+		string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "bob.dat");
 
 		public MainPage()
 		{
@@ -25,6 +27,11 @@ namespace FastCards
 			Review.ShowAnswer(this);
 			newQuestion = true;
 			Answer.Text = "";
+
+			if (File.Exists(fileName))
+			{
+				SaveData.ReadDeckUserPerformance(deck, "bob.dat", out _, out deck);
+			}
 		}
 
 		void Button_Clicked(object sender, System.EventArgs e)
@@ -39,6 +46,8 @@ namespace FastCards
 				Review.ShowAnswer(this);
 				newQuestion = true;
 			}
+
+			SaveData.SaveDeckUserPeformance(deck,deck.Count, "bob.dat");
 		}
 	}
 }
