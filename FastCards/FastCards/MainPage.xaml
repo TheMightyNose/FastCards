@@ -3,13 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:FastCards"
              x:Class="FastCards.MainPage">
-    <StackLayout Spacing="20" BackgroundColor="Azure">
-        
-        <Label x:Name="Question" FontSize="Large" Text="Question" 
+    <StackLayout Spacing="20" BackgroundColor="Black">
+
+        <Label></Label>
+        <Label x:Name="Question" FontSize="Large" Text="Question" TextColor="White"
         HorizontalOptions="Center" VerticalOptions="Start" x:FieldModifier="public"/>
-        <Entry x:Name="Input" Placeholder="Answer" Text="" x:FieldModifier="public"/>
-        <Button x:Name="Button" Text="Check answer" Clicked="Button_Clicked" x:FieldModifier="public"/>
-        <Label x:Name="Answer" FontSize="Large" Text="lol" x:FieldModifier="public"/>
+        <Entry x:Name="Input" Placeholder="Answer" Text=""  TextColor="#FFFFFF" x:FieldModifier="public" HorizontalTextAlignment="Center"/>
+        <Button x:Name="Button" Text="Check answer"  TextColor="White" BackgroundColor="#303030" Clicked="Button_Clicked" x:FieldModifier="public"/>
+        <Label x:Name="Answer" FontSize="Large" Text="lol" TextColor="White" x:FieldModifier="public" HorizontalOptions="Center"/>
 
     </StackLayout>
 </ContentPage>

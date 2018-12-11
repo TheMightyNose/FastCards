@@ -23,9 +23,8 @@ namespace FastCards
 			deck = TestDeck.Load();
 
 			Review.ShowAnswer(this);
-			{
-				newQuestion = true;
-			}
+			newQuestion = true;
+			Answer.Text = "";
 		}
 
 		void Button_Clicked(object sender, System.EventArgs e)

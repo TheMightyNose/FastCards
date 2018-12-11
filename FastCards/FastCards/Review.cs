@@ -42,12 +42,12 @@ namespace FastCards
 			if (mp.Input.Text.ToLower() == (mp.meaning ? mp.deck[mp.currentCard].meaning : mp.deck[mp.currentCard].reading).ToLower())
 			{
 				mp.deck[mp.currentCard].SaveScore(true, mp.stopwatch.ElapsedMilliseconds / 1000.0f);
-				mp.Answer.Text = "correct!" + mp.deck[mp.currentCard].timeUsed.Average();
+				mp.Answer.Text = "correct!" + " \nAvg time:" + mp.deck[mp.currentCard].timeUsed.Average();
 			}
 			else
 			{
 				mp.deck[mp.currentCard].SaveScore(false, mp.stopwatch.ElapsedMilliseconds / 1000.0f);
-				mp.Answer.Text = "Wrong! " + (mp.meaning ? mp.deck[mp.currentCard].meaning : mp.deck[mp.currentCard].reading) + mp.deck[mp.currentCard].timeUsed.Average();
+				mp.Answer.Text = "Wrong! " + (mp.meaning ? mp.deck[mp.currentCard].meaning : mp.deck[mp.currentCard].reading) + " \nAvg time:" + mp.deck[mp.currentCard].timeUsed.Average();
 			}
 			mp.Button.Text = "Next Question";
 			mp.Input.Text = "";
