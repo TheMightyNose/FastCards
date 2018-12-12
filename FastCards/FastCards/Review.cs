@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using Xamarin.Forms;
 
 namespace FastCards
 {
@@ -10,11 +11,13 @@ namespace FastCards
 		static public void NewQuestion(MainPage mp)
 		{
 			if (mp.deck[mp.currentCard].meaning != "" && !mp.meaning)
-			{
+			{//reading
+				mp.Question.TextColor = Color.Pink;
 				mp.meaning = true;
 			}
 			else
 			{
+				mp.Question.TextColor = Color.LightCyan;
 				mp.meaning = false;
 				mp.currentCard = NextCard.Pick(mp.deck);
 			}
