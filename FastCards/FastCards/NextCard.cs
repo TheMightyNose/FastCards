@@ -11,17 +11,17 @@ namespace FastCards
 
 		static Random random = new Random(); 
 
-		public static void CalculateAllSeeds(List<Card> deck)
+		public static void CalculateAllSeeds(Deck deck)
 		{
 			totalWeight = 0;
-			for(int i = 0; i < deck.Count; i++)
+			for(int i = 0; i < deck.learnedCards; i++)
 			{
-				totalWeight += (int)deck[i].timeUsed.Average();
-				deck[i].weight = totalWeight;
+				totalWeight += (int)deck.cards[i].timeUsed.Average();
+				deck.cards[i].weight = totalWeight;
 			}
 		}
 
-		public static int Pick(List<Card> deck)
+		public static int Pick(Deck deck)
 		{
 			int i;
 
@@ -29,9 +29,9 @@ namespace FastCards
 
 			int bob = random.Next(0, totalWeight);
 
-			for(i = 0; i < deck.Count; i++)
+			for(i = 0; i < deck.cards.Count; i++)
 			{
-				if(bob < deck[i].weight)
+				if(bob < deck.cards[i].weight)
 				{
 					return i;
 				}

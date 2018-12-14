@@ -10,7 +10,7 @@ namespace FastCards
     {
 		static public void NewQuestion(MainPage mp)
 		{
-			if (mp.deck[mp.currentCard].meaning != "" && !mp.meaning)
+			if (mp.deck.cards[mp.currentCard].meaning != "" && !mp.meaning)
 			{//reading
 				mp.Question.TextColor = Color.Pink;
 				mp.meaning = true;
@@ -24,11 +24,11 @@ namespace FastCards
 
 			if (mp.meaning)
 			{
-				mp.Question.Text = "Meaning: " + mp.deck[mp.currentCard].front;
+				mp.Question.Text = "Meaning: " + mp.deck.cards[mp.currentCard].front;
 			}
 			else
 			{
-				mp.Question.Text = "Reading " + mp.deck[mp.currentCard].front;
+				mp.Question.Text = "Reading " + mp.deck.cards[mp.currentCard].front;
 			}
 			mp.Answer.Text = "";
 			mp.Button.Text = "Check Answer";
@@ -38,15 +38,15 @@ namespace FastCards
 
 		static public void ShowAnswer(MainPage mp)
 		{
-			if (mp.Input.Text.ToLower() == (mp.meaning ? mp.deck[mp.currentCard].meaning : mp.deck[mp.currentCard].reading).ToLower())
+			if (mp.Input.Text.ToLower() == (mp.meaning ? mp.deck.cards[mp.currentCard].meaning : mp.deck.cards[mp.currentCard].reading).ToLower())
 			{
-				mp.deck[mp.currentCard].SaveScore(true, mp.stopwatch.ElapsedMilliseconds / 1000.0f);
-				mp.Answer.Text = "correct!" + " \nAvg time:" + mp.deck[mp.currentCard].timeUsed.Average();
+				mp.deck.cards[mp.currentCard].SaveScore(true, mp.stopwatch.ElapsedMilliseconds / 1000.0f);
+				mp.Answer.Text = "correct!" + " \nAvg time:" + mp.deck.cards[mp.currentCard].timeUsed.Average();
 			}
 			else
 			{
-				mp.deck[mp.currentCard].SaveScore(false, mp.stopwatch.ElapsedMilliseconds / 1000.0f);
-				mp.Answer.Text = "Wrong! " + (mp.meaning ? mp.deck[mp.currentCard].meaning : mp.deck[mp.currentCard].reading) + " \nAvg time:" + mp.deck[mp.currentCard].timeUsed.Average();
+				mp.deck.cards[mp.currentCard].SaveScore(false, mp.stopwatch.ElapsedMilliseconds / 1000.0f);
+				mp.Answer.Text = "Wrong! " + (mp.meaning ? mp.deck.cards[mp.currentCard].meaning : mp.deck.cards[mp.currentCard].reading) + " \nAvg time:" + mp.deck.cards[mp.currentCard].timeUsed.Average();
 			}
 			mp.Button.Text = "Next Question";
 			mp.Input.Text = "";

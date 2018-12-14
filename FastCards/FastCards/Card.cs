@@ -9,9 +9,9 @@ namespace FastCards
 	{
 		const float maxTime = 30.0f;
 		const float failTime = maxTime * 2;
-		public const int timesMeasured = 3;
+		public const int timesMeasuredPerSide = 3;
 		public int weight;
-
+		public int timesMeasured; 
 		public string front;
 		public string reading;
 		public string meaning;
@@ -23,8 +23,9 @@ namespace FastCards
 			this.front = front;
 			this.reading = reading;
 			this.meaning = meaning;
+			timesMeasured = (meaning == "" ? timesMeasuredPerSide : timesMeasuredPerSide * 2);
 
-			for(int i = 0; i < (meaning == "" ? timesMeasured : timesMeasured * 2); i++)
+			for (int i = 0; i < timesMeasured; i++)
 			{
 				timeUsed.Enqueue(failTime);
 			}

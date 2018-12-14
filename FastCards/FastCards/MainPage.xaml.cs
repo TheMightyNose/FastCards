@@ -14,21 +14,24 @@ namespace FastCards
 		public Stopwatch stopwatch = new Stopwatch();
 		public bool meaning = true;
 		public int currentCard = 0;
-		public List<Card> deck = new List<Card>();
+		public Deck deck = new Deck();
 		bool newQuestion = true;
-		const string file = "test.dat";
-		string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), file);
+		//const string file = "test.dat";
+		//string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), file);
 
 		public MainPage()
 		{
 			InitializeComponent();
 
-			deck = TestDeck.Load();
+			deck = JapaneseVerbs.Load();
+
+			string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), deck.name + ".dat");
 
 			if (File.Exists(fileName))
 			{
-				SaveData.ReadDeckUserPerformance(deck, file, out _, out deck);
+				deck = IO.ReadDeckUserPerformance(deck, deck.name);
 			}
+			deck.learnedCards = 5;
 			NextCard.Pick(deck);
 			Review.ShowAnswer(this);
 			newQuestion = true;
@@ -49,7 +52,7 @@ namespace FastCards
 				newQuestion = true;
 			}
 
-			SaveData.SaveDeckUserPeformance(deck,deck.Count, file);
+			IO.SaveDeckUserPerformance(deck);
 		}
 	}
 }
