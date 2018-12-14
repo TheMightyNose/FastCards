@@ -17,7 +17,6 @@ namespace FastCards
 		public Deck deck = new Deck();
 		bool newQuestion = true;
 		//const string file = "test.dat";
-		//string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), file);
 
 		public MainPage()
 		{

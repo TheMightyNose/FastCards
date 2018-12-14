@@ -14,7 +14,7 @@ namespace FastCards
 		public int timesMeasured; 
 		public string front;
 		public string reading;
-		public string meaning;
+		public List<string> meaning = new List<string>();
 		public bool learned = false;
 		public Queue<float> timeUsed = new Queue<float>();
 
@@ -22,10 +22,25 @@ namespace FastCards
 		{
 			this.front = front;
 			this.reading = reading;
-			this.meaning = meaning;
+			this.meaning.Add(meaning);
+
 			timesMeasured = (meaning == "" ? timesMeasuredPerSide : timesMeasuredPerSide * 2);
 
 			for (int i = 0; i < timesMeasured; i++)
+			{
+				timeUsed.Enqueue(failTime);
+			}
+		}
+
+		public Card(string front, string reading, List<string> meaning )
+		{
+			this.front = front;
+			this.reading = reading;
+			this.meaning = new List<string>(meaning);
+
+			timesMeasured = timesMeasuredPerSide * 2;
+
+			for(int i = 0; i < timesMeasured; i++)
 			{
 				timeUsed.Enqueue(failTime);
 			}

@@ -11,7 +11,7 @@ namespace FastCards
 		static public void NewQuestion(MainPage mp)
 		{
 			mp.Input.BackgroundColor = Color.Black;
-			if (mp.deck.cards[mp.currentCard].meaning != "" && !mp.meaning)
+			if (mp.deck.cards[mp.currentCard].meaning[0] != "" && !mp.meaning)
 			{//reading
 				mp.Question.TextColor = Color.Pink;
 				mp.meaning = true;
@@ -40,7 +40,24 @@ namespace FastCards
 
 		static public void ShowAnswer(MainPage mp)
 		{
-			if (mp.Input.Text.ToLower() == (mp.meaning ? mp.deck.cards[mp.currentCard].meaning : mp.deck.cards[mp.currentCard].reading).ToLower())
+			bool correctAnswer()
+			{
+				if (mp.meaning)
+				{
+					foreach (string meaning in mp.deck.cards[mp.currentCard].meaning)
+					{
+						if (mp.Input.Text.ToLower() == meaning.ToLower()) return true;
+					}
+
+					return false;
+				}
+				else
+				{
+					return mp.Input.Text.ToLower() == mp.deck.cards[mp.currentCard].reading.ToLower();
+				}
+			}
+
+			if (correctAnswer())
 			{
 				mp.deck.cards[mp.currentCard].SaveScore(true, mp.stopwatch.ElapsedMilliseconds / 1000.0f);
 				mp.Answer.Text = "correct!" + " \nAvg time:" + mp.deck.cards[mp.currentCard].timeUsed.Average();
@@ -49,7 +66,10 @@ namespace FastCards
 			else
 			{
 				mp.deck.cards[mp.currentCard].SaveScore(false, mp.stopwatch.ElapsedMilliseconds / 1000.0f);
-				mp.Answer.Text = "Wrong! " + (mp.meaning ? mp.deck.cards[mp.currentCard].meaning : mp.deck.cards[mp.currentCard].reading) + " \nAvg time:" + mp.deck.cards[mp.currentCard].timeUsed.Average();
+				string meanings = "";
+				foreach (string meaning in mp.deck.cards[mp.currentCard].meaning) meanings += meaning + ", ";
+				meanings = meanings.Substring(0, meanings.Length - 2);
+				mp.Answer.Text = "Wrong! " + (mp.meaning ? meanings : mp.deck.cards[mp.currentCard].reading) + " \nAvg time:" + mp.deck.cards[mp.currentCard].timeUsed.Average();
 				mp.Input.BackgroundColor = Color.DarkRed;
 			}
 			mp.Button.Text = "Next Question";
