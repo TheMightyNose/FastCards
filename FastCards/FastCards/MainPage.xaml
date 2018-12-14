@@ -5,12 +5,12 @@
              x:Class="FastCards.MainPage">
     <StackLayout Spacing="20" BackgroundColor="Black">
 
-        <Label></Label>
-        <Label x:Name="Question" FontSize="Large" Text="Question" TextColor="White"
+   
+         <Label x:Name="Question" Margin="0,20,0,0" FontSize="Large" Text="Question" TextColor="White"
             HorizontalOptions="Center" VerticalOptions="Start" x:FieldModifier="public"/>
-        <Entry x:Name="Input" Placeholder="Answer" Text=""  TextColor="#FFFFFF" 
+        <Entry x:Name="Input" Placeholder="" Text=""  TextColor="#FFFFFF" 
             x:FieldModifier="public" HorizontalTextAlignment="Center" 
-            IsSpellCheckEnabled="False" IsTextPredictionEnabled="false"/>
+            IsSpellCheckEnabled="False" IsTextPredictionEnabled="false" BackgroundColor="Black"/>
         <Button x:Name="Button" Text="Check answer"  TextColor="White" BackgroundColor="#303030" 
                 Clicked="Button_Clicked" x:FieldModifier="public"/>
         <Label x:Name="Answer" FontSize="Large" Text="lol" TextColor="White" 

@@ -10,6 +10,7 @@ namespace FastCards
     {
 		static public void NewQuestion(MainPage mp)
 		{
+			mp.Input.BackgroundColor = Color.Black;
 			if (mp.deck.cards[mp.currentCard].meaning != "" && !mp.meaning)
 			{//reading
 				mp.Question.TextColor = Color.Pink;
@@ -28,8 +29,9 @@ namespace FastCards
 			}
 			else
 			{
-				mp.Question.Text = "Reading " + mp.deck.cards[mp.currentCard].front;
+				mp.Question.Text = "Pronunciation: " + mp.deck.cards[mp.currentCard].front;
 			}
+			mp.Input.Text = "";
 			mp.Answer.Text = "";
 			mp.Button.Text = "Check Answer";
 
@@ -42,14 +44,16 @@ namespace FastCards
 			{
 				mp.deck.cards[mp.currentCard].SaveScore(true, mp.stopwatch.ElapsedMilliseconds / 1000.0f);
 				mp.Answer.Text = "correct!" + " \nAvg time:" + mp.deck.cards[mp.currentCard].timeUsed.Average();
+				mp.Input.BackgroundColor = Color.DarkGreen;
 			}
 			else
 			{
 				mp.deck.cards[mp.currentCard].SaveScore(false, mp.stopwatch.ElapsedMilliseconds / 1000.0f);
 				mp.Answer.Text = "Wrong! " + (mp.meaning ? mp.deck.cards[mp.currentCard].meaning : mp.deck.cards[mp.currentCard].reading) + " \nAvg time:" + mp.deck.cards[mp.currentCard].timeUsed.Average();
+				mp.Input.BackgroundColor = Color.DarkRed;
 			}
 			mp.Button.Text = "Next Question";
-			mp.Input.Text = "";
+			
 			mp.stopwatch.Reset();
 		}
     }
