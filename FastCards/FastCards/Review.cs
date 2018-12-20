@@ -8,7 +8,7 @@ namespace FastCards
 {
     static class Review
     {
-		static public void NewQuestion(MainPage mp)
+		static public void NewQuestion(ReviewPage mp)
 		{
 			mp.Input.BackgroundColor = Color.Black;
 			if (mp.deck.cards[mp.currentCard].meaning[0] != "" && !mp.meaning)
@@ -38,7 +38,7 @@ namespace FastCards
 			mp.stopwatch.Start();
 		}
 
-		static public void ShowAnswer(MainPage mp)
+		static public void ShowAnswer(ReviewPage mp)
 		{
 			bool correctAnswer()
 			{

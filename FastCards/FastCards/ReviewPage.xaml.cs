@@ -9,17 +9,19 @@ using System.IO;
 
 namespace FastCards
 {
-	public partial class MainPage : ContentPage
+	public partial class ReviewPage : ContentPage
 	{
 		public Stopwatch stopwatch = new Stopwatch();
 		public bool meaning = true;
 		public int currentCard = 0;
 		public Deck deck = new Deck();
 		bool newQuestion = true;
+		App handle;
 		//const string file = "test.dat";
 
-		public MainPage()
+		public ReviewPage(App handle)
 		{
+			this.handle = handle;
 			InitializeComponent();
 
 			deck = JapaneseVerbs.Load();
@@ -46,12 +48,19 @@ namespace FastCards
 				newQuestion = false;
 			}
 			else
-			{ 
+			{
 				Review.ShowAnswer(this);
 				newQuestion = true;
 			}
 
 			IO.SaveDeckUserPerformance(deck);
+		}
+
+		protected override bool OnBackButtonPressed()
+		{
+			handle.MainPage = new MenuPage(handle);
+
+			return true;
 		}
 	}
 }

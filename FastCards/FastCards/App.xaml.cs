@@ -10,12 +10,12 @@ namespace FastCards
 		public App()
 		{
 			InitializeComponent();
-
-			MainPage = new MainPage();
+			MainPage = new MenuPage(this);
 		}
 
 		protected override void OnStart()
 		{
+		
 			// Handle when your app starts
 		}
 
@@ -26,6 +26,7 @@ namespace FastCards
 
 		protected override void OnResume()
 		{
+			//MainPage = currentPage;
 			// Handle when your app resumes
 		}
 	}
