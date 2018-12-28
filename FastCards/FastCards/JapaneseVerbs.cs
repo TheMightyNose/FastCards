@@ -21,7 +21,6 @@ namespace FastCards
 					new Card("あげる", "ageru", "to give"),
 					new Card("遊ぶ", "asobu", "to play"),
 					new Card("浴びる", "abiru", "to take a shower"),
-					new Card("会う", "au", "to meet"),
 					new Card("洗う", "arau", "to wash"),
 					new Card("有る", "aru", new List<string>{"to exist", "to be" }),
 					new Card("ある", "aru", "to possess"),

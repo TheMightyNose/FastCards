@@ -5,8 +5,10 @@ using System.Linq;
 
 namespace FastCards
 {
-    static class NextCard
+	static class NextCard
     {
+		public static bool allLearned = false;
+
 		public static int totalWeight;
 
 		static Random random = new Random(); 
@@ -21,19 +23,59 @@ namespace FastCards
 			}
 		}
 
+		public static void CalculateLessonSeeds(Deck deck)
+		{
+			totalWeight = 0;
+			int learningCards = deck.learnedCards + 5;
+			allLearned = true;
+
+			if (learningCards > deck.cards.Count) learningCards = deck.cards.Count;
+
+			for (int i = deck.learnedCards; i < learningCards; i++)
+			{
+				totalWeight += (int)deck.cards[i].timeUsed.Average();
+				if ((int)deck.cards[i].timeUsed.Average() > Card.learnedTime)
+				{
+					allLearned = false;
+				} 
+				deck.cards[i].weight = totalWeight;
+			}
+		}
+
 		public static int Pick(Deck deck)
 		{
 			int i;
-
-			CalculateAllSeeds(deck);
-
-			int bob = random.Next(0, totalWeight);
-
-			for(i = 0; i < deck.cards.Count; i++)
+			
+			if(ReviewPage.learningMode == true)
 			{
-				if(bob < deck.cards[i].weight)
+				CalculateLessonSeeds(deck);
+
+				int learningCards = deck.learnedCards + 5;
+
+				if (learningCards > deck.cards.Count) learningCards = deck.cards.Count;
+
+				int selectedCard = random.Next(0, totalWeight);
+
+				for (i = deck.learnedCards; i < learningCards; i++)
 				{
-					return i;
+					if (selectedCard < deck.cards[i].weight)
+					{
+						return i;
+					}
+				}
+			}
+			else
+			{
+				CalculateAllSeeds(deck);
+
+				int selectedCard = random.Next(0, totalWeight);
+
+				for (i = 0; i < deck.cards.Count; i++)
+				{
+					if (selectedCard < deck.cards[i].weight)
+					{
+						return i;
+					}
 				}
 			}
 

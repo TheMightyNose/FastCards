@@ -22,6 +22,13 @@ namespace FastCards
 		void GoToReviews(object sender, System.EventArgs e)
 		{
 			handle.MainPage = new ReviewPage(handle);
+			ReviewPage.learningMode = false;
+		}
+
+		void GoToLearning(object sender, System.EventArgs e)
+		{
+			handle.MainPage = new ReviewPage(handle);
+			ReviewPage.learningMode = true;
 		}
 	}
 }

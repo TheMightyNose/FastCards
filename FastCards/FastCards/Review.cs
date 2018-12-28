@@ -20,7 +20,9 @@ namespace FastCards
 			{
 				mp.Question.TextColor = Color.LightCyan;
 				mp.meaning = false;
+
 				mp.currentCard = NextCard.Pick(mp.deck);
+
 			}
 
 			if (mp.meaning)

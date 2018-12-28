@@ -11,6 +11,8 @@ namespace FastCards
 {
 	public partial class ReviewPage : ContentPage
 	{
+		public static bool learningMode = false;
+
 		public Stopwatch stopwatch = new Stopwatch();
 		public bool meaning = true;
 		public int currentCard = 0;
@@ -26,14 +28,17 @@ namespace FastCards
 
 			deck = JapaneseVerbs.Load();
 
+			deck.learnedCards = 0;
+ 
 			string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), deck.name + ".dat");
 
 			if (File.Exists(fileName))
 			{
 				deck = IO.ReadDeckUserPerformance(deck, deck.name);
-			}
-			deck.learnedCards = 5;
+			}			
+
 			NextCard.Pick(deck);
+
 			Review.ShowAnswer(this);
 			newQuestion = true;
 			Answer.Text = "";
@@ -42,15 +47,28 @@ namespace FastCards
 
 		void Button_Clicked(object sender, System.EventArgs e)
 		{
-			if (newQuestion == true)
+			if (NextCard.allLearned)
 			{
-				Review.NewQuestion(this);
-				newQuestion = false;
+				NextCard.allLearned = false;
+				deck.learnedCards += 5;
+				if (deck.learnedCards > deck.cards.Count) deck.learnedCards = deck.cards.Count;
+
+				IO.SaveDeckUserPerformance(deck);
+
+				handle.MainPage = new MenuPage(handle);
 			}
 			else
 			{
-				Review.ShowAnswer(this);
-				newQuestion = true;
+				if (newQuestion == true)
+				{
+					Review.NewQuestion(this);
+					newQuestion = false;
+				}
+				else
+				{
+					Review.ShowAnswer(this);
+					newQuestion = true;
+				}
 			}
 
 			IO.SaveDeckUserPerformance(deck);

@@ -7,6 +7,7 @@ namespace FastCards
 {
 	public class Card
 	{
+		public const float learnedTime = maxTime / 2;
 		const float maxTime = 30.0f;
 		const float failTime = maxTime * 2;
 		public const int timesMeasuredPerSide = 3;
